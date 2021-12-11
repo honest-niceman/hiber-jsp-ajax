@@ -1,0 +1,206 @@
+body{
+    background: slategray;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+.content-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #ca6a00;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    align-content: center;
+    padding: 12px 15px;
+    width: 200px;
+    position: sticky;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid orange;
+}
+
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: orange;
+}
+
+.tableFixHead {
+    overflow: auto;
+    height: 250px;
+}
+
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.text-center {
+    text-align:center;
+}
+
+.div-center{
+    width: 150px;
+    margin: auto;
+}
+
+.div-centered{
+    width: 70px;
+    margin: auto;
+}
+
+hr {
+    margin: auto;
+    padding: 4px;
+}
+
+li {
+    display: inline;
+    margin: auto;
+    padding: 3px;
+}
+
+li a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+
+li a::after{
+    content: "";
+    background: white;
+    mix-blend-mode: exclusion;
+    width: 300px;
+    height: 0;
+    position: absolute;
+    bottom: -4px;
+    left: -110px;
+    transition: all .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+li a:hover::after{
+    height: calc(100% + 8px)
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 40px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid orange;
+    border-radius: 4px;
+}
+
+.choose{
+    width: 100%;
+    padding: 12px 40px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid orange;
+    border-radius: 4px;
+}
+
+.aParent div {
+    float: top;
+    clear: none;
+}
+
+.btn {
+    width: 70px;
+    height: 42px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid coral;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+.special-btn {
+    width: 170px;
+    height: 42px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid coral;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+.p{
+    font-weight: bold;
+    color: orange;
+    text-align: center;
+}
+
+.btn:hover,
+.special-btn:hover,
+.center-btn:hover{
+    transition: 1s ease-in-out;
+    background: orange;
+}
+
+.btn:hover svg,
+.special-btn:hover svg,
+.center-btn:hover svg{
+    stroke-dashoffset: -480;
+}
+
+.btn span,
+.special-btn span,
+.center-btn span{
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+.center-btn {
+    width: 400px;
+    height: 42px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid coral;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.page-center{
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -125px 0 0 -125px;
+}
