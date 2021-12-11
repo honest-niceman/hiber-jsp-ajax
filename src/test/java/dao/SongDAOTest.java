@@ -29,12 +29,12 @@ class SongDAOTest {
         song.setIdAlbum(album);
         song.setDurationSong(154);
         song.setNameSong("Test");
-        song.setId(1);
 
         SongDAO songDAO = new SongDAO();
 
         assertTrue(songDAO.insertSong(song));
-        assertNotNull(songDAO.selectSong(1));
+
+        assertNotNull(songDAO.selectSong(song.getId()));
         assertFalse(songDAO.selectSongs().isEmpty());
 
         song.setNameSong("New Name");

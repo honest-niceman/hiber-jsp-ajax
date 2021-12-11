@@ -23,7 +23,7 @@ class AlbumDAOTest {
 
         AlbumDAO albumDAO = new AlbumDAO();
         assertTrue(albumDAO.insertAlbum(album));
-        assertNotNull(albumDAO.selectAlbum(1));
+        assertNotNull(albumDAO.selectAlbum(album.getId()));
         assertFalse(albumDAO.selectAlbums().isEmpty());
 
         album.setNameAlbum("New Name");

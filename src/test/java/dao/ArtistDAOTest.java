@@ -18,8 +18,7 @@ class ArtistDAOTest {
         assertTrue(artistDAO.insertArtist(artist));
         assertTrue(artistDAO.insertArtist(artist1));
 
-        artist = artistDAO.selectArtist(1);
-        assertNotNull(artist);
+        assertNotNull(artistDAO.selectArtist(artist.getId()));
 
         artist.setNameArtist("i30");
 
@@ -31,7 +30,7 @@ class ArtistDAOTest {
 
         assertTrue(artistDAO.selectArtistsByName("not existed").isEmpty());
 
-        assertTrue(artistDAO.deleteArtist(1));
-        assertTrue(artistDAO.deleteArtist(2));
+        assertTrue(artistDAO.deleteArtist(artist.getId()));
+        assertTrue(artistDAO.deleteArtist(artist1.getId()));
     }
 }
