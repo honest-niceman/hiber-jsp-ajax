@@ -16,8 +16,9 @@
         Albums
     </title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="ajax/albumAutocompletion.js"></script>
 </head>
-<body>
+<body onload="init()">
 <div class="div-center">
     <div class="aParent">
         <ul class="hr">
@@ -158,9 +159,14 @@
                 <td>
                     <input type="text"
                            name="artistId"
-                           placeholder="Enter artist id"
-                           title="Enter artist id"
-                           required="required">
+                           placeholder="Enter artist id (or name)"
+                           title="Enter artist id (or name)"
+                           id="complete-field"
+                           onkeyup="doCompletion()"/>
+                </td>
+
+                <td id="auto-row" colspan="2">
+                    <table id="complete-table" class="content-table"></table>
                 </td>
 
                 <td>

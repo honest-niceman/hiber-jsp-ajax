@@ -3,6 +3,7 @@ package servlets;
 import dao.AlbumDAO;
 import dao.ArtistDAO;
 import entity.Album;
+import entity.Artist;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/albums")
 public class AlbumController extends HttpServlet {
@@ -59,6 +61,11 @@ public class AlbumController extends HttpServlet {
                 request.getRequestDispatcher("album.jsp").forward(request, response);
                 break;
             }
+            case "complete": {
+                String targetId = request.getParameter("id");
+                doCompletion(targetId, response);
+                break;
+            }
         }
     }
 
@@ -80,5 +87,38 @@ public class AlbumController extends HttpServlet {
         album.setIdArtist(artistDAO.selectArtist(Integer.parseInt(request.getParameter("artistId"))));
 
         albumDAO.insertAlbum(album);
+    }
+
+    private void doCompletion(String targetId, HttpServletResponse response) {
+        boolean namesAdded = false;
+        List<Artist> artists = null;
+        StringBuilder sb = null;
+        // check if user sent empty string
+        if (!targetId.equals("")) {
+            artists = artistDAO.selectArtists();
+            sb = new StringBuilder();
+            for (Artist a : artists) {
+                if (a.getNameArtist().toLowerCase().contains(targetId)) {
+                    sb.append("<artist>");
+                    sb.append("<id>").append(a.getId()).append("</id>");
+                    sb.append("<name>").append(a.getNameArtist()).append("</name>");
+                    sb.append("</artist>");
+                    namesAdded = true;
+                }
+            }
+        }
+        if (namesAdded) {
+            response.setContentType("text/xml");
+            response.setHeader("Cache-Control", "no-cache");
+            System.out.println(sb);
+            try {
+                response.getWriter().write("<artists>" + sb + "</artists>");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //nothing to show
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        }
     }
 }
