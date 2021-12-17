@@ -2,6 +2,7 @@ package servlets;
 
 import dao.AlbumDAO;
 import dao.ArtistDAO;
+import dao.SongDAO;
 import entity.Album;
 import entity.Artist;
 
@@ -17,11 +18,13 @@ import java.util.List;
 public class AlbumController extends HttpServlet {
     private AlbumDAO albumDAO;
     private ArtistDAO artistDAO;
+    private SongDAO songDAO;
 
     @Override
     public void init() {
         albumDAO = new AlbumDAO();
         artistDAO = new ArtistDAO();
+        songDAO = new SongDAO();
     }
 
     @Override
@@ -66,6 +69,12 @@ public class AlbumController extends HttpServlet {
                 doCompletion(targetId, response);
                 break;
             }
+            case "show-album-songs": {
+                request.setAttribute("albums-list", albumDAO.selectAlbums());
+                request.setAttribute("songs-list", songDAO.songsByAlbumName(request.getParameter("name")));
+                request.getRequestDispatcher("album.jsp").forward(request, response);
+                break;
+            }
         }
     }
 
@@ -98,7 +107,7 @@ public class AlbumController extends HttpServlet {
             artists = artistDAO.selectArtists();
             sb = new StringBuilder();
             for (Artist a : artists) {
-                if (a.getNameArtist().toLowerCase().contains(targetId.toLowerCase())) {
+                if (a.getNameArtist().toLowerCase().startsWith(targetId.toLowerCase())) {
                     sb.append("<artist>");
                     sb.append("<id>").append(a.getId()).append("</id>");
                     sb.append("<name>").append(a.getNameArtist()).append("</name>");

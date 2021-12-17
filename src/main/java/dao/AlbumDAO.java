@@ -115,4 +115,28 @@ public class AlbumDAO {
         }
         return true;
     }
+
+    public List<Album> selectAlbumsByArtistName(String name) {
+        Transaction transaction = null;
+        List<Album> albums = null;
+        try (Session session = HSFUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            name = name + "%";
+
+            System.out.println(name);
+            albums = session
+                    .createQuery("select a from Album a join a.idArtist where upper(trim(a.idArtist.nameArtist)) like upper(trim(:name))", Album.class)
+                    .setParameter("name", name)
+                    .list();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return albums;
+    }
 }

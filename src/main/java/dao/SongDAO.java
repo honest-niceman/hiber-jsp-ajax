@@ -115,5 +115,29 @@ public class SongDAO {
         }
         return true;
     }
+
+    public List<Song> songsByAlbumName(String name){
+        Transaction transaction = null;
+        List<Song> songs = null;
+        try (Session session = HSFUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            name = name + "%";
+
+            System.out.println(name);
+            songs = session
+                    .createQuery("select s from Song s join s.idAlbum where upper(trim(s.idAlbum.nameAlbum)) like upper(trim(:name))", Song.class)
+                    .setParameter("name", name)
+                    .list();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return songs;
+    }
 }
 

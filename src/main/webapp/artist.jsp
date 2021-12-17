@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
 <%@ page import="entity.Artist" %>
+<%@ page import="entity.Album" %>
 <%@ page errorPage="error.jsp" %>
 <html>
 <head>
@@ -153,7 +154,7 @@
           method="post">
 
         <div class="div-center">
-            <p class="p">All artists, which name started with...</p>
+            <p class="p">All albums of concrete artist</p>
         </div>
 
         <div>
@@ -169,7 +170,7 @@
                     <th scope="col" class="text-center">
                         <button type="submit"
                                 name="action"
-                                value="show-names"
+                                value="show-albums"
                                 class="special-btn">
                             <i>Show</i>
                         </button>
@@ -189,7 +190,7 @@
                 <tr>
                     <th scope="col" class="text-center">ID</th>
                     <th scope="col" class="text-center">Name</th>
-                    <th class="text-center">Actions</th>
+                    <th scope="col" class="text-center">Genre</th>
                 </tr>
                 </thead>
             </table>
@@ -198,9 +199,9 @@
         <div class="tableFixHead">
             <table class="content-table">
                 <%
-                    if (request.getAttribute("artists-name-list") != null) {
-                        List<Artist> artistsBrand = (List<Artist>) request.getAttribute("artists-name-list");
-                        for (Artist artist : artistsBrand) {
+                    if (request.getAttribute("artists-albums") != null) {
+                        List<Album> albums = (List<Album>) request.getAttribute("artists-albums");
+                        for (Album album : albums) {
                 %>
                 <form id="artists-name"
                       action="artists"
@@ -210,32 +211,22 @@
                         <td>
                             <input type="text"
                                    name="id"
-                                   value="<%=artist.getId()%>"
-                                   title="<%=Integer.toString(artist.getId())%>" readonly>
+                                   value="<%=album.getId()%>"
+                                   title="<%=Integer.toString(album.getId())%>" readonly>
                         </td>
 
                         <td>
                             <input type="text"
                                    name="name"
-                                   value="<%=artist.getNameArtist()%>"
-                                   title="<%=artist.getNameArtist()%>">
+                                   value="<%=album.getNameAlbum()%>"
+                                   title="<%=album.getNameAlbum()%>">
                         </td>
 
                         <td>
-                            <div class="div-center">
-                                <button type="submit"
-                                        name="action"
-                                        value="edit"
-                                        class="btn">
-                                    <i>Edit</i>
-                                </button>
-                                <button type="submit"
-                                        name="action"
-                                        value="delete"
-                                        class="btn">
-                                    <i>Delete</i>
-                                </button>
-                            </div>
+                            <input type="text"
+                                   name="name"
+                                   value="<%=album.getGenreAlbum()%>"
+                                   title="<%=album.getGenreAlbum()%>">
                         </td>
                     </tr>
                     </tbody>

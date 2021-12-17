@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.AlbumDAO;
 import dao.ArtistDAO;
 import entity.Artist;
 
@@ -13,10 +14,12 @@ import java.io.IOException;
 @WebServlet("/artists")
 public class ArtistController extends HttpServlet {
     private ArtistDAO artistDAO;
+    private AlbumDAO albumDAO;
 
     @Override
     public void init() {
         artistDAO = new ArtistDAO();
+        albumDAO = new AlbumDAO();
     }
 
     @Override
@@ -53,6 +56,12 @@ public class ArtistController extends HttpServlet {
             case "show-names": {
                 request.setAttribute("artists-list", artistDAO.selectArtists());
                 request.setAttribute("artists-name-list", artistDAO.selectArtistsByName(request.getParameter("name")));
+                request.getRequestDispatcher("artist.jsp").forward(request, response);
+                break;
+            }
+            case "show-albums": {
+                request.setAttribute("artists-list", artistDAO.selectArtists());
+                request.setAttribute("artists-albums", albumDAO.selectAlbumsByArtistName(request.getParameter("name")));
                 request.getRequestDispatcher("artist.jsp").forward(request, response);
                 break;
             }
