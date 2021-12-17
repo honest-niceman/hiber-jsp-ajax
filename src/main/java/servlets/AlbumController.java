@@ -98,7 +98,7 @@ public class AlbumController extends HttpServlet {
             artists = artistDAO.selectArtists();
             sb = new StringBuilder();
             for (Artist a : artists) {
-                if (a.getNameArtist().toLowerCase().contains(targetId)) {
+                if (a.getNameArtist().toLowerCase().contains(targetId.toLowerCase())) {
                     sb.append("<artist>");
                     sb.append("<id>").append(a.getId()).append("</id>");
                     sb.append("<name>").append(a.getNameArtist()).append("</name>");
