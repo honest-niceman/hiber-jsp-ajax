@@ -1,15 +1,14 @@
-package dao;
+package test;
 
+import dao.AlbumDAO;
+import dao.ArtistDAO;
+import dao.SongDAO;
 import entity.Album;
 import entity.Artist;
 import entity.Song;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SongDAOTest {
-    @Test
-    void test() {
+public class SongTest {
+    public static void main(String[] args) {
         Artist artist = new Artist();
 
         artist.setNameArtist("John1");
@@ -32,14 +31,16 @@ class SongDAOTest {
 
         SongDAO songDAO = new SongDAO();
 
-        assertTrue(songDAO.insertSong(song));
+        songDAO.insertSong(song);
 
-        assertNotNull(songDAO.selectSong(song.getId()));
-        assertFalse(songDAO.selectSongs().isEmpty());
+        songDAO.selectSong(song.getId());
+        songDAO.selectSongs();
 
         song.setNameSong("New Name");
-        assertTrue(songDAO.updateSong(song));
+        songDAO.updateSong(song);
 
-        assertTrue(songDAO.deleteSong(1));
+        songDAO.deleteSong(song.getId());
+        albumDAO.deleteAlbum(album.getId());
+        artistDAO.deleteArtist(artist.getId());
     }
 }

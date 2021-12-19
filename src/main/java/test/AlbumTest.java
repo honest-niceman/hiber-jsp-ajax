@@ -1,14 +1,12 @@
-package dao;
+package test;
 
+import dao.AlbumDAO;
+import dao.ArtistDAO;
 import entity.Album;
 import entity.Artist;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class AlbumDAOTest {
-    @Test
-    void test() {
+public class AlbumTest {
+    public static void main(String[] args) {
         Artist artist = new Artist();
 
         artist.setNameArtist("John1");
@@ -22,13 +20,14 @@ class AlbumDAOTest {
         album.setIdArtist(artist);
 
         AlbumDAO albumDAO = new AlbumDAO();
-        assertTrue(albumDAO.insertAlbum(album));
-        assertNotNull(albumDAO.selectAlbum(album.getId()));
-        assertFalse(albumDAO.selectAlbums().isEmpty());
+        albumDAO.insertAlbum(album);
+        albumDAO.selectAlbum(album.getId());
+        albumDAO.selectAlbums();
 
         album.setNameAlbum("New Name");
-        assertTrue(albumDAO.updateAlbum(album));
+        albumDAO.updateAlbum(album);
 
-        assertTrue(albumDAO.deleteAlbum(1));
+        albumDAO.deleteAlbum(album.getId());
+        artistDAO.deleteArtist(artist.getId());
     }
 }
